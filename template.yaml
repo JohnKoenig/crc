@@ -5,6 +5,11 @@ Description: >
 
   Sample SAM Template for crc
 
+# Questions
+# Is the Process DynamoDB Stream required?
+# Programmatically add security policies
+# Fix DB type error
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
