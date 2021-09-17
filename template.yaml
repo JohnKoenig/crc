@@ -17,12 +17,48 @@ Resources:
       CodeUri: sitecounter/
       Handler: app.lambda_handler
       Runtime: python3.9
+      Policies: AWSLambdaDynamoDBExecutionRole
       Events:
         SiteCounter:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /johnkoenig_ninja_sitecounter
             Method: get
+
+  # DynamoDB Content
+  ProcessDynamoDBStream:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.9
+      Policies: AWSLambdaDynamoDBExecutionRole
+      Events:
+        Stream:
+          Type: DynamoDB
+          Properties:
+            Stream: !GetAtt DynamoDBTable.StreamArn
+            BatchSize: 10
+            StartingPosition: TRIM_HORIZON
+
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      TableName: "johnkoenig-ninja-counter3"
+      AttributeDefinitions: 
+        - AttributeName: "site"
+          AttributeType: S
+        - AttributeName: "hit_count"
+          AttributeType: N
+      KeySchema: 
+        - AttributeName: "site"
+          KeyType: HASH
+        - AttributeName: "hit_count"
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
