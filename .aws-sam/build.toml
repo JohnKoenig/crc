@@ -8,4 +8,11 @@ source_md5 = ""
 packagetype = "Zip"
 functions = ["SiteCounterFunction"]
 
+[function_build_definitions.34c2add6-efb4-4348-b70f-2d269f031d10]
+codeuri = "C:\\Users\\jkoenig\\Documents\\aws_sam\\crc"
+runtime = "python3.9"
+source_md5 = ""
+packagetype = "Zip"
+functions = ["ProcessDynamoDBStream"]
+
 [layer_build_definitions]
