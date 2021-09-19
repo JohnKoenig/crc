@@ -3,7 +3,7 @@ import boto3
 #from boto3.dynamodb.conditions import Key
 
 dynamodb = boto3.resource('dynamodb')
-myTable = 'johnkoenig-ninja-counter'
+myTable = 'johnkoenig-ninja-counter-prod'
 table = dynamodb.Table(myTable)
 
 # Update
