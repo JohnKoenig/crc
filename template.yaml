@@ -22,7 +22,7 @@ Resources:
       CodeUri: sitecounter/
       Handler: app.lambda_handler
       Runtime: python3.9
-      Policies: AWSLambdaDynamoDBExecutionRole
+      Policies: [AWSLambdaDynamoDBExecutionRole, AmazonDynamoDBFullAccess, AWSLambdaInvocation-DynamoDB]
       Events:
         SiteCounter:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -48,17 +48,13 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties: 
-      TableName: "johnkoenig-ninja-counter3"
+      TableName: "johnkoenig-ninja-counter-prod"
       AttributeDefinitions: 
         - AttributeName: "site"
           AttributeType: S
-        - AttributeName: "hit_count"
-          AttributeType: N
       KeySchema: 
         - AttributeName: "site"
           KeyType: HASH
-        - AttributeName: "hit_count"
-          KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
