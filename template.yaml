@@ -31,7 +31,7 @@ Resources:
         SiteCounter:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /johnkoenig_ninja_sitecounter
+            Path: /johnkoenigninjasitecounter
             Method: get
   ProcessDynamoDBStream:
     Type: AWS::Serverless::Function
