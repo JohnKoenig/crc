@@ -49,7 +49,7 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties: 
-      TableName: "johnkoenig-ninja-counter5"
+      TableName: "johnkoenig-ninja-counter"
       AttributeDefinitions: 
         - AttributeName: "site"
           AttributeType: S
