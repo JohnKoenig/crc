@@ -3,13 +3,6 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   crc
 
-  Sample SAM Template for crc
-
-# Questions
-# Is the Process DynamoDB Stream required?
-# Programmatically add security policies
-# Fix DB type error
-
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -44,7 +37,6 @@ Resources:
             Stream: !GetAtt DynamoDBTable.StreamArn
             BatchSize: 10
             StartingPosition: TRIM_HORIZON
-
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties: 
