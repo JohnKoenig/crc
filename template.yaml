@@ -20,6 +20,19 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+  crcServerlessFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: crc-sitecounter/
+      Handler: app.lambda_handler
+      Runtime: python3.9
+  #    Policies: [AWSLambdaDynamoDBExecutionRole, AmazonDynamoDBFullAccess, AWSLambdaInvocation-DynamoDB]
+      Events:
+        SiteCounter:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /johnkoenig_ninja_sitecounter
+            Method: get
   ProcessDynamoDBStream:
     Type: AWS::Serverless::Function
     Properties:
@@ -48,19 +61,6 @@ Resources:
         WriteCapacityUnits: 1
       StreamSpecification:
         StreamViewType: NEW_IMAGE
-  #crcServerlessFunction:
-  #  Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-  #  Properties:
-  #    CodeUri: crc-sitecounter/
-  #    Handler: app.lambda_handler
-  #    Runtime: python3.9
-  #    Policies: [AWSLambdaDynamoDBExecutionRole, AmazonDynamoDBFullAccess, AWSLambdaInvocation-DynamoDB]
-  #    Events:
-  #      SiteCounter:
-  #        Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-  #        Properties:
-  #          Path: /johnkoenig_ninja_sitecounter
-  #          Method: get
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
